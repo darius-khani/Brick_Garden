@@ -1,2 +1,5 @@
 # Brick_Garden
-TBD
+
+Personal Project: Learning how to program an app using Python and Kivy
+
+A Mindfulness Greenhouse App
