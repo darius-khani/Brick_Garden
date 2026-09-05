@@ -1,0 +1,21 @@
+<HomeScreen>:
+    canvas:
+        Rectangle:
+            pos: self.center_x-5, 0
+            size: 10, self.height
+
+    Label:
+        size_hint: None, None
+        size: self.texture_size
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: "0"
+
+    Label:
+        size_hint: None, None
+        size: self.texture_size
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: "0"
