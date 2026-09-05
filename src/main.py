@@ -25,5 +25,5 @@ class BrickGarden(ScreenManager):
     pass
 
 # Runs The Program | python src/main.py
-if __name__ == '__main__':
+if __name__ == '__main__': # Protected from running when imported
     BrickGardenApp().run()
