@@ -2,4 +2,4 @@
 
 Personal Project: Learning how to program an app using Python and Kivy
 
-A Mindfulness Greenhouse App
+A Mindfulness Miniature Greenhouse App
