@@ -13,11 +13,75 @@
 
         # Blue Sky
         Color: 
-            rgba: 0, 0.15, 1, 0.2
+            rgba: 0, 0.15, 1, 0.3
         Rectangle:
             pos: 0, floor_height + tool_bar_height
             size: self.width, self.height
+
+        # Sun Rays
+        Color:
+            rgba: 0.84, 0.75, 0.7, 0.7
+        Quad:
+            points: 
+                [self.width-70-30, self.height-40-20,
+                self.width-70-300, self.height-40-1500,
+                self.width-70+0, self.height-40-1500,
+                self.width-70+30, self.height-40-20]
+        Quad:
+            points: 
+                [self.width-90-30, self.height-40-20,
+                self.width-90-1000, self.height-40-1500,
+                self.width-90-700, self.height-40-1500,
+                self.width-90+30, self.height-40-20]
+        Quad:
+            points: 
+                [self.width-120-30, self.height-10-20,
+                self.width-120-1500, self.height-10-1200,
+                self.width-120-1100, self.height-40-1200,
+                self.width-120+30, self.height-40-20]
+
+        # Sun
+        Color:
+            rgba: 0.9, 0.65, 0.3, 1
+        Ellipse:
+            pos: self.width-170, self.height-90
+            size: 200, 200
+
+        # Clouds
+        Color:
+            rgba: 0.85, 0.91, 1, 1
+        Ellipse:
+            pos: 40, self.height-260
+            size: 100, 80
+        Ellipse:
+            pos: 80, self.height-280
+            size: 160, 120
+        Ellipse:
+            pos: 180, self.height-260
+            size: 100, 80
+        Ellipse:
+            pos: 240, self.height-140
+            size: 100, 80
+        Ellipse:
+            pos: 280, self.height-160
+            size: 160, 120
+        Ellipse:
+            pos: 380, self.height-140
+            size: 100, 80
         
+        # Clouds
+        Color:
+            rgba: 0.85, 0.91, 1, 1
+        Ellipse:
+            pos: 40, self.height-260
+            size: 100, 80
+        Ellipse:
+            pos: 80, self.height-280
+            size: 160, 120
+        Ellipse:
+            pos: 180, self.height-260
+            size: 100, 80
+
         # GreenHouse Floor
         Color:
             rgba: 0.6, 0.42, 0.29, 1
@@ -113,14 +177,28 @@
             width: 10
 
         # Shelves
-
-
-        # Sun
-
-        # Sun Rays
-
-        # Clouds
-        
+        Color:
+            rgba: 0.5, 0.35, 0.17, 1
+        Line:
+            points: 100, floor_height + tool_bar_height - 30, 100, floor_height + tool_bar_height + greenhouse_height/2
+            width: 15
+            cap: "square"
+        Line:
+            points: self.width-100, floor_height + tool_bar_height - 30, self.width-100, floor_height + tool_bar_height + greenhouse_height/2
+            width: 20
+            cap: "square"
+        Line:
+            points: 60, floor_height + tool_bar_height + 40, self.width-60, floor_height + tool_bar_height + 40
+            width: 13
+            cap: "square"
+        Line:
+            points: 60, floor_height + tool_bar_height + 240, self.width-60, floor_height + tool_bar_height + 240
+            width: 13
+            cap: "square"
+        Line:
+            points: 60, floor_height + tool_bar_height + 440, self.width-60, floor_height + tool_bar_height + 440
+            width: 15
+            cap: "square"
 
     # Currency Label
     Label:
