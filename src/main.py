@@ -21,8 +21,8 @@ ASSETS_DIR = os.path.join(os.path.dirname(__file__), 'assets')
 resource_add_path(ASSETS_DIR)
 
 # Register Fonts
-LabelBase.register(name='IndieFlower', fn_regular=os.path.join(ASSETS_DIR, 'Indie_Flower/IndieFlower-Regular.ttf'))
-LabelBase.register(name='NanumBrush', fn_regular=os.path.join(ASSETS_DIR, 'Nanum_Brush_Script/NanumBrushScript-Regular.ttf'))
+LabelBase.register(name='IndieFlower', fn_regular=os.path.join(ASSETS_DIR, 'fonts/Indie_Flower/IndieFlower-Regular.ttf'))
+LabelBase.register(name='NanumBrush', fn_regular=os.path.join(ASSETS_DIR, 'fonts/Nanum_Brush_Script/NanumBrushScript-Regular.ttf'))
 
 # Builds App | Creates ScreenManager | Loads brickgarden.kv
 class BrickGardenApp(App):
