@@ -1,21 +1,125 @@
+#:set tool_bar_height 150
+#:set floor_height 150
+#:set greenhouse_height 1100
+
 <HomeScreen>:
     canvas:
+        # White Base Layer
+        Color:
+            rgba: 1, 1, 1, 1
         Rectangle:
-            pos: self.center_x-5, 0
-            size: 10, self.height
+            pos: 0, 0
+            size: self.width, self.height
 
+        # Blue Sky
+        Color: 
+            rgba: 0, 0.15, 1, 0.2
+        Rectangle:
+            pos: 0, floor_height + tool_bar_height
+            size: self.width, self.height
+        
+        # GreenHouse Floor
+        Color:
+            rgba: 0.6, 0.42, 0.29, 1
+        Quad:
+            points:
+                [0, tool_bar_height, 
+                self.width, tool_bar_height, 
+                self.width, floor_height + tool_bar_height, 
+                0, floor_height + tool_bar_height]
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Line:
+            points: self.width/2, tool_bar_height, self.width/2, floor_height + tool_bar_height
+            width: 2
+        Line:
+            points: self.width/3, tool_bar_height, self.width/3+20, floor_height + tool_bar_height
+            width: 2
+        Line:
+            points: self.width/6, tool_bar_height, self.width/6+40, floor_height + tool_bar_height
+            width: 2
+        Line:
+            points: self.width/80, tool_bar_height, self.width/80+60, floor_height + tool_bar_height
+            width: 2
+        Line:
+            points: self.width*2/3, tool_bar_height, self.width*2/3-20, floor_height + tool_bar_height
+            width: 2
+        Line:
+            points: self.width*5/6, tool_bar_height, self.width*5/6-40, floor_height + tool_bar_height
+            width: 2
+        Line:
+            points: self.width*79/80, tool_bar_height, self.width*79/80-60, floor_height + tool_bar_height
+            width: 2
+
+        # Bottom Tool Bar
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Rectangle:
+            pos: 0, 0
+            size: self.width, tool_bar_height
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            points: 0, tool_bar_height, self.width, tool_bar_height
+            width: 12
+
+        # GreenHouse Wall
+        Color:
+            rgba: 1, 1, 1, 0.5
+        Rectangle:
+            pos: 0, floor_height + tool_bar_height
+            size: self.width, greenhouse_height
+
+        # GreenHouse Roof
+        Color:
+            rgba: 0, 1, 0.7, 0.3
+        Rectangle:
+            pos: 0, greenhouse_height*4/5 + floor_height + tool_bar_height
+            size: self.width, greenhouse_height/5
+
+        # GreenHouse Wall Frame
+        Color:
+            rgba: 0.4, 0.26, 0.13, 1
+        Line:
+            rectangle: 10, floor_height + tool_bar_height, self.width-20, greenhouse_height*4/5
+            width: 10
+        Line:
+            points: self.width/3, floor_height + tool_bar_height, self.width/3, greenhouse_height*4/5 + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: self.width*2/3, floor_height + tool_bar_height, self.width*2/3, greenhouse_height*4/5 + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: -30, floor_height + tool_bar_height, self.width+30, floor_height + tool_bar_height
+            width: 10
+        
+        #GreenHouse Roof Frame
+        Line:
+            points: 0, greenhouse_height + floor_height + tool_bar_height, self.width, greenhouse_height + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: self.width/3, greenhouse_height*4/5 + floor_height + tool_bar_height, self.width/3+50, greenhouse_height + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: self.width*2/3, greenhouse_height*4/5 + floor_height + tool_bar_height, self.width*2/3+50, greenhouse_height + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: 0, greenhouse_height*4/5 + floor_height + tool_bar_height, 0+50, greenhouse_height + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: self.width, greenhouse_height*4/5 + floor_height + tool_bar_height, self.width+50, greenhouse_height + floor_height + tool_bar_height
+            width: 10
+        
+        
+
+    # Currency Label
     Label:
         size_hint: None, None
         size: self.texture_size
-        font_size: 70
-        center_x: root.width / 4
-        top: root.top - 50
-        text: "0"
-
-    Label:
-        size_hint: None, None
-        size: self.texture_size
-        font_size: 70
-        center_x: root.width * 3 / 4
-        top: root.top - 50
-        text: "0"
+        font_size: 90
+        x: root.x + 20
+        y: root.y + 20
+        text: "0 Vitality"
+        color: 0.3, 0.7, 0.3, 1
+        # font: 
+        
