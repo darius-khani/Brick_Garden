@@ -176,30 +176,6 @@
             points: -30, floor_height + tool_bar_height, self.width+30, floor_height + tool_bar_height
             width: 10
 
-        # Shelves
-        Color:
-            rgba: 0.5, 0.35, 0.17, 1
-        Line:
-            points: 100, floor_height + tool_bar_height - 30, 100, floor_height + tool_bar_height + greenhouse_height/2
-            width: 15
-            cap: "square"
-        Line:
-            points: self.width-100, floor_height + tool_bar_height - 30, self.width-100, floor_height + tool_bar_height + greenhouse_height/2
-            width: 13
-            cap: "square"
-        Line:
-            points: 60, floor_height + tool_bar_height + 40, self.width-60, floor_height + tool_bar_height + 40
-            width: 13
-            cap: "square"
-        Line:
-            points: 60, floor_height + tool_bar_height + 240, self.width-60, floor_height + tool_bar_height + 240
-            width: 13
-            cap: "square"
-        Line:
-            points: 60, floor_height + tool_bar_height + 440, self.width-60, floor_height + tool_bar_height + 440
-            width: 15
-            cap: "square"
-
     # Currency Label
     Label:
         size_hint: None, None
@@ -210,4 +186,22 @@
         text: f"{root.vitality} Vitality"
         color: 0.3, 0.7, 0.3, 1
         font_name: 'NanumBrush'
+
+
+    # Shelves
+    Image:
+        id: shelving
+        source: 'greenhouse/shelving.png'
+        size_hint: None, None
+        width: root.width - 40
+        height: self.width / self.image_ratio
+        pos: 20, floor_height + tool_bar_height - 120
+
+    # Plants
+    Image:
+        size_hint: None, None
+        size: self.texture_size
+        id: monstera
+        source: 'plants/monstera_5.png'
+        pos: 120, 20+ floor_height + tool_bar_height
         

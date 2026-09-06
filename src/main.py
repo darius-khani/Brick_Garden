@@ -16,7 +16,7 @@ from screens import HomeScreen
 import os
 from kivy.resources import resource_add_path
 
-# Add Path References
+# Add Resource Path
 ASSETS_DIR = os.path.join(os.path.dirname(__file__), 'assets')
 resource_add_path(ASSETS_DIR)
 
