@@ -77,23 +77,9 @@
             pos: 0, greenhouse_height*4/5 + floor_height + tool_bar_height
             size: self.width, greenhouse_height/5
 
-        # GreenHouse Wall Frame
-        Color:
-            rgba: 0.4, 0.26, 0.13, 1
-        Line:
-            rectangle: 10, floor_height + tool_bar_height, self.width-20, greenhouse_height*4/5
-            width: 10
-        Line:
-            points: self.width/3, floor_height + tool_bar_height, self.width/3, greenhouse_height*4/5 + floor_height + tool_bar_height
-            width: 10
-        Line:
-            points: self.width*2/3, floor_height + tool_bar_height, self.width*2/3, greenhouse_height*4/5 + floor_height + tool_bar_height
-            width: 10
-        Line:
-            points: -30, floor_height + tool_bar_height, self.width+30, floor_height + tool_bar_height
-            width: 10
-        
         #GreenHouse Roof Frame
+        Color:
+            rgba: 0.3, 0.18, 0.1, 1
         Line:
             points: 0, greenhouse_height + floor_height + tool_bar_height, self.width, greenhouse_height + floor_height + tool_bar_height
             width: 10
@@ -109,17 +95,41 @@
         Line:
             points: self.width, greenhouse_height*4/5 + floor_height + tool_bar_height, self.width+50, greenhouse_height + floor_height + tool_bar_height
             width: 10
-        
+
+        # GreenHouse Wall Frame
+        Color:
+            rgba: 0.4, 0.26, 0.13, 1
+        Line:
+            rectangle: 10, floor_height + tool_bar_height, self.width-20, greenhouse_height*4/5
+            width: 10
+        Line:
+            points: self.width/3, floor_height + tool_bar_height, self.width/3, greenhouse_height*4/5 + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: self.width*2/3, floor_height + tool_bar_height, self.width*2/3, greenhouse_height*4/5 + floor_height + tool_bar_height
+            width: 10
+        Line:
+            points: -30, floor_height + tool_bar_height, self.width+30, floor_height + tool_bar_height
+            width: 10
+
+        # Shelves
+
+
+        # Sun
+
+        # Sun Rays
+
+        # Clouds
         
 
     # Currency Label
     Label:
         size_hint: None, None
         size: self.texture_size
-        font_size: 90
+        font_size: 110
         x: root.x + 20
-        y: root.y + 20
-        text: "0 Vitality"
+        y: root.y + 15
+        text: f"{root.vitality} Vitality"
         color: 0.3, 0.7, 0.3, 1
-        # font: 
+        font_name: 'NanumBrush'
         
