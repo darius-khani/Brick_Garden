@@ -16,11 +16,12 @@ from screens import HomeScreen
 import os
 from paths import *
 
+# Load Universal Data Object
+from data.local_data import local_data
+
 # Add Resource Path for Kivy
 from kivy.resources import resource_add_path
 resource_add_path(ASSETS_DIR)
-
-from data.local_data import local_data
 
 # Register Fonts
 LabelBase.register(name='IndieFlower', fn_regular=os.path.join(ASSETS_DIR, 'fonts/Indie_Flower/IndieFlower-Regular.ttf'))
