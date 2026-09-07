@@ -191,7 +191,7 @@
     # Shelves
     Image:
         id: shelving
-        source: 'greenhouse/shelving.png'
+        source: "greenhouse/shelving.png"
         size_hint: None, None
         width: root.width - 40
         height: self.width / self.image_ratio
@@ -202,6 +202,7 @@
         size_hint: None, None
         size: self.texture_size
         id: monstera
-        source: 'plants/monstera_5.png'
-        pos: 120, 20+ floor_height + tool_bar_height
+        source: f"plants/{root.plant_name}_{root.plant_stage}.png"
+        center_x: 200
+        y: 20 + floor_height + tool_bar_height
         
