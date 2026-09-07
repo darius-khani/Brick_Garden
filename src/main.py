@@ -16,8 +16,12 @@ from screens import HomeScreen
 import os
 from paths import *
 
+### MUST BE DONE BEFORE APP LOADS ###
+
 # Load Universal Data Object
 from data.local_data import local_data
+
+#####################################
 
 # Add Resource Path for Kivy
 from kivy.resources import resource_add_path
