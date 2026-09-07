@@ -14,11 +14,13 @@ from screens import HomeScreen
 
 # Path Set Up
 import os
-from kivy.resources import resource_add_path
+from paths import *
 
-# Add Resource Path
-ASSETS_DIR = os.path.join(os.path.dirname(__file__), 'assets')
+# Add Resource Path for Kivy
+from kivy.resources import resource_add_path
 resource_add_path(ASSETS_DIR)
+
+from data.local_data import local_data
 
 # Register Fonts
 LabelBase.register(name='IndieFlower', fn_regular=os.path.join(ASSETS_DIR, 'fonts/Indie_Flower/IndieFlower-Regular.ttf'))
