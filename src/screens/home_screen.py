@@ -11,7 +11,7 @@ Builder.load_file(os.path.join(os.path.dirname(__file__), 'home_screen.kv'))    
 
 # HomeScreen Widget
 class HomeScreen(Screen):
-    vitality = NumericProperty(10)
-    plant_name = StringProperty("monstera")
-    plant_stage = NumericProperty(5)
+    vitality = NumericProperty(local_data.vitality)
+    plant_name = StringProperty(local_data.plants[0]["name"])
+    plant_stage = NumericProperty(int(local_data.plants[0]["stage"]))
     pass

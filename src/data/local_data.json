@@ -1,13 +1,13 @@
 {
-  "vitality": 100,
+  "vitality": 10,
   "bricked_time": 0,
   "plants": [
     {
-      "name": "monstera_",
+      "name": "monstera",
       "stage": 5
     },
     {
-      "name": "bird_of_paradise_",
+      "name": "bird_of_paradise",
       "stage": 2.5
     }
   ]
