@@ -18,11 +18,11 @@ def fetch_all_events():
     events.sort(key=lambda event: event["timestamp"])   # Sort Events Chronologically
     return events
 
-def calculated_bricked_seconds(events):
+def calculated_bricked_seconds(events, last_pull=None):
     now_ms = time.time() * 1000 # Converting from sec to JavaScript JSON ms
 
     total_seconds = 0
-    previous_timestamp = None   # Update to saved time_stamp in future
+    previous_timestamp = last_pull   # Update to saved time_stamp in future
     previous_state = "unbricked"
 
     # If File Has Saved Timestamp
@@ -47,7 +47,7 @@ def calculated_bricked_seconds(events):
         total_seconds += now_ms - previous_timestamp
 
     # Convert to Seconds and Return
-    return total_seconds / 1000
+    return (total_seconds / 1000, previous_state) 
 
 # Test Printing Seconds Since Last Save
 if __name__ == "__main__": # Protected from running when imported as __name__ changes from __main__ upon importing

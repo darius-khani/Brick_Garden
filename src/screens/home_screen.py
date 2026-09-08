@@ -4,6 +4,11 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.properties import NumericProperty, StringProperty
 
+from kivy.vector import Vector
+from kivy.clock import Clock
+
+from random import randint
+
 from data.local_data import local_data
 
 # Loads home_screen.kv | Register HomeScreen Rule
@@ -11,6 +16,16 @@ Builder.load_file(os.path.join(os.path.dirname(__file__), 'home_screen.kv'))    
 
 # HomeScreen Widget
 class HomeScreen(Screen):
+    def on_enter(self, *args):
+        self._update_event = Clock.schedule_interval(self.update, 1.0/60.0)
+
+    def on_leave(self, *args):
+        self._update_event.cancel()
+
+    def update(self, dt):
+        
+        pass
+    
     vitality = NumericProperty(local_data.vitality)
     plant_name = StringProperty(local_data.plants[0]["name"])
     plant_stage = NumericProperty(int(local_data.plants[0]["stage"]))

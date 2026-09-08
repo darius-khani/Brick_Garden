@@ -40,6 +40,7 @@ class BrickGardenApp(App):
         #List of Screens
         sm.add_widget(HomeScreen(name='home'))   # Automatically Displays First Listed
         #sm.add_widget(Breathing(name='breathing'))
+        
         return sm
 
 
