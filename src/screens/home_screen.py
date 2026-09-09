@@ -23,7 +23,7 @@ class HomeScreen(Screen):
         self._update_event.cancel()
 
     def update(self, dt):
-        
+        #local_data.last_pull = now_ms
         pass
     
     vitality = NumericProperty(local_data.vitality)
