@@ -4,7 +4,7 @@ import time
 
 from paths import LOCAL_DATA, TEMP_DATA
 
-from data import brick_sync
+from data import fetch_all_events, calculated_bricked_seconds
 
 class LocalData():
     # Local Data
@@ -27,9 +27,9 @@ class LocalData():
         self.getData()
 
         # Pull From FireBase
-        events = brick_sync.fetch_all_events()
+        events = fetch_all_events()
 
-        self.bricked_time = brick_sync.calculated_bricked_seconds(events, self.last_pull)
+        self.bricked_time = calculated_bricked_seconds(events, self.last_pull)
 
         if events[-1]["state"] == "bricked": self.bricked = True
         else: self.bricked = False

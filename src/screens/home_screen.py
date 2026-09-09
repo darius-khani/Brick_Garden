@@ -9,7 +9,7 @@ from kivy.clock import Clock
 
 from random import randint
 
-from data.local_data import local_data
+from data import local_data
 
 # Loads home_screen.kv | Register HomeScreen Rule
 Builder.load_file(os.path.join(os.path.dirname(__file__), 'home_screen.kv'))    # Strips 'homescreen.py' from path string and replaces it with 'home_screen.kv'

@@ -19,7 +19,7 @@ from paths import *
 ### MUST BE DONE BEFORE APP LOADS ###
 
 # Load Universal Data Object
-from data.local_data import local_data
+from data import local_data
 
 #####################################
 
