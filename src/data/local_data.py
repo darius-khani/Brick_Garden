@@ -35,7 +35,7 @@ class LocalData():
         else: self.bricked = False
 
         # Update last_pull to current time in ms and write to local_data.json
-        self.last_pull = time.time() * 1000
+        self.last_pull = int(time.time() * 1000)
         self.updateData()
 
     # Read Data From local_data.json
@@ -48,7 +48,7 @@ class LocalData():
 
     # Update Data on local_data.json
     def updateData(self):
-        # Read Old Data
+        # Pull Old Data
         with open(LOCAL_DATA, "r", encoding="utf-8") as file:
             data = json.load(file)
 
@@ -86,10 +86,5 @@ class LocalData():
 local_data = LocalData()
 
 if __name__ == "__main__":
-    data = LocalData()
-    data.printData()
-    #data.vitality += 120
-    data.updateData()
-    #data.getData()
-    data.printData()
+    local_data.printData()
     #data.stdReset()

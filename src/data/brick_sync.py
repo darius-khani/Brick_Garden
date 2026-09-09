@@ -57,8 +57,8 @@ def calculated_bricked_seconds(events, last_pull=None):
 
 # Test Printing Seconds Since Last Save
 if __name__ == "__main__": # Protected from running when imported as __name__ changes from __main__ upon importing
-    num = 2000
-    for event in fetch_all_events():
+    num = 10
+    for event in reversed(fetch_all_events()):
         print(event)
         num -= 1
         if num <=0:
