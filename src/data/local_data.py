@@ -6,15 +6,18 @@ from paths import LOCAL_DATA, TEMP_DATA
 
 from data import fetch_all_events, calculated_bricked_seconds
 
-class LocalData():
+from kivy.event import EventDispatcher
+from kivy.properties import NumericProperty, ListProperty
+
+class LocalData(EventDispatcher):
     # Local Data
-    last_pull: int         # Last Time App was Open
-    vitality: int          # Vitality i.e. Currency
-    plants: list           # List of Dictionaries of User's plants
+    last_pull: int                  # Last Time App was Open
+    vitality = NumericProperty(0)   # Vitality i.e. Currency
+    plants = ListProperty([])       # List of Dictionaries of User's plants
 
     # Brick Synced Data
-    bricked_time: int      # Time phone was bricked since last opened
-    bricked: bool          # Curren Brick Status
+    bricked_time: int               # Time phone was bricked since last opened
+    bricked: bool                   # Current Brick Status
 
     # Testing
     #manual_override = True
@@ -23,6 +26,9 @@ class LocalData():
 
     # On Launch: Pull Local Data and Pull from FireBase | Calculate Bricked Time
     def __init__(self):
+        # Inherit from EventDispacher
+        super().__init__()
+
         # Pull From local_data.json
         self.getData()
 

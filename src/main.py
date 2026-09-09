@@ -8,6 +8,7 @@ Config.set('graphics', 'resizable', False)
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from kivy.core.text import LabelBase
+from kivy.properties import ObjectProperty
 
 # Screens
 from screens import HomeScreen
@@ -34,7 +35,11 @@ LabelBase.register(name='PixelifySans', fn_regular=os.path.join(ASSETS_DIR, 'fon
 
 # Builds App | Creates ScreenManager | Loads brickgarden.kv
 class BrickGardenApp(App):
+    local_data = ObjectProperty(None)
     def build(self):
+        # Make local_data a property of App
+        self.local_data = local_data
+
         sm = BrickGarden()
 
         #List of Screens

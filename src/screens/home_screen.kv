@@ -100,7 +100,7 @@
         size_hint: None, None
         size: self.texture_size
         id: monstera
-        source: f"plants/{root.plant_name}_{root.plant_stage}.png"
+        source: "plants/{}_{}.png".format(app.local_data.plants[0]['name'], app.local_data.plants[0]['stage'])
         center_x: 200
         y: 20 + floor_height + tool_bar_height
         
@@ -111,7 +111,7 @@
         font_size: 57
         right: root.width - 10
         top: root.height + 10
-        text: f"{root.vitality} Vit."
+        text: "{} Vit.".format(app.local_data.vitality)
         color: 0.2, 0.6, 0.2, 1
         font_name: 'PixelifySans'
 

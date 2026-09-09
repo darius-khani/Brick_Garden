@@ -2,7 +2,6 @@ import os
 
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
-from kivy.properties import NumericProperty, StringProperty
 
 from kivy.vector import Vector
 from kivy.clock import Clock
@@ -10,6 +9,9 @@ from kivy.clock import Clock
 from random import randint
 
 from data import local_data
+
+# Keyboard Commands for Testing
+from kivy.core.window import Window
 
 # Loads home_screen.kv | Register HomeScreen Rule
 Builder.load_file(os.path.join(os.path.dirname(__file__), 'home_screen.kv'))    # Strips 'homescreen.py' from path string and replaces it with 'home_screen.kv'
@@ -19,16 +21,32 @@ class HomeScreen(Screen):
     def on_enter(self, *args):
         self._update_event = Clock.schedule_interval(self.update, 1.0/60.0)
 
+        #self._growthUpdate_event = Clock.schedule_interval(self.sync_check, 1)
+        #self._saveFile_event = Clock.schedule_interval(self.sync_check, 5)
+
+        ### TESTING ###
+        Window.bind(on_key_down=self.on_key_down)
+
     def on_leave(self, *args):
         self._update_event.cancel()
 
+        #self._growthUpdate_event.cancel()
+        #self._saveFile_event.cancel()
+
+        ### TESTING ###
+        Window.unbind(on_key_down=self.on_key_down)
+
+
     def update(self, dt):
         #local_data.last_pull = now_ms
+
         pass
-    
-    vitality = NumericProperty(local_data.vitality)
-    plant_name = StringProperty(local_data.plants[0]["name"])
-    plant_stage = NumericProperty(int(local_data.plants[0]["stage"]))
+
+    ### TESTING ###
+    def on_key_down(self, window, key, scancode, codepoint, modifier):
+        if key == 32:   # spacebar
+            local_data.vitality += 10
+
     pass
 
 
