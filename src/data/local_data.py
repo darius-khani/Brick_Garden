@@ -8,20 +8,20 @@ from data import brick_sync
 
 class LocalData():
     # Local Data
-    last_pull: int
-    vitality: int
-    plants: list
+    last_pull: int         # Last Time App was Open
+    vitality: int          # Vitality i.e. Currency
+    plants: list           # List of Dictionaries of User's plants
 
     # Brick Synced Data
-    bricked_time: int
-    bricked: bool
+    bricked_time: int      # Time phone was bricked since last opened
+    bricked: bool          # Curren Brick Status
 
     # Testing
-    manual_override = True
-    manual_bricked = True
-    manual_bricked_time = 1788907085451
+    #manual_override = True
+    #manual_bricked = True
+    #manual_bricked_time = 1788907085451
 
-    # Initialize Using Standard Values
+    # On Launch: Pull Local Data and Pull from FireBase | Calculate Bricked Time
     def __init__(self):
         # Pull From local_data.json
         self.getData()
@@ -30,13 +30,13 @@ class LocalData():
         events = brick_sync.fetch_all_events()
 
         self.bricked_time = brick_sync.calculated_bricked_seconds(events, self.last_pull)
-        
+
         if events[-1]["state"] == "bricked": self.bricked = True
         else: self.bricked = False
 
-        # Update last_pull to current time in ms
+        # Update last_pull to current time in ms and write to local_data.json
         self.last_pull = time.time() * 1000
-
+        self.updateData()
 
     # Read Data From local_data.json
     def getData(self):
