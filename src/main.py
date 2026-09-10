@@ -48,7 +48,7 @@ class BrickGardenApp(App):
         self.bg_music = SoundLoader.load(os.path.join(ASSETS_DIR, 'audio/piano_ambience.ogg'))
         if self.bg_music:
             self.bg_music.loop = True
-            self.bg_music.volume = 0.4   # ambient music should sit under any UI sounds
+            self.bg_music.volume = 0.7   # ambient music should sit under any UI sounds
             self.bg_music.play()
 
         # Initialize Screen Manager

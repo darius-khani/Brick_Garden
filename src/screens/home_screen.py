@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import datetime
 
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
@@ -38,6 +39,9 @@ class HomeScreen(Screen):
         # Load Plants
         self.load_plants()
 
+        # Load Current Time
+        self.curr_time = datetime.now().strftime("%I:%M")
+
         # Clocks
         self._update_event = Clock.schedule_interval(self.update, 1.0/20.0)
         self._growthUpdate_event = Clock.schedule_interval(self.growthUpdate, 1)
@@ -54,28 +58,42 @@ class HomeScreen(Screen):
         ### TESTING ###
         Window.unbind(on_key_down=self.on_key_down)
 
+    ##############
+    ### CLOCKS ###
+    ##############
+
+    # Frame by Frame Updates
     def update(self, dt):
 
         pass
 
+    # 1 Second Updates
     def growthUpdate(self, dt):
+        # Update Time
+        local_data.curr_time = datetime.now().strftime("%I:%M")
+
+        # Iterate Through All Plant Widgets
         for widget in self.ids.plant_layer.children:
             plant = widget.plant
+
+            # Only Update if not Maxed Out
             if plant.data["stage"] < 5:
                 old_stage = int(plant.data["stage"])
                 plant.data["stage"] += plant.data["growth_rate"] * dt
+
                 # Update Image | Stage Has Incrased
                 if plant.data["stage"] - old_stage > 1:
                     widget.updateSource()
+
                 # Stage Max of 5
                 if plant.data["stage"] > 5:
                     plant.data["stage"] = 5
 
         # Update last_pull
         local_data.last_pull = int(time.time() * 1000) # Technically off by dt
-        local_data.vitality+=1
         pass
 
+    # 5 Second Updates
     def saveFile(self, dt):
         local_data.updateData()
         pass
@@ -86,10 +104,11 @@ class HomeScreen(Screen):
             local_data.vitality += 10
     pass
 
-
+# Plant Widget
 class PlantWidget(Image):
-    plant = ObjectProperty(None)
+    plant = ObjectProperty(None) # Holds Plant Object
 
+    # Manually Updates Image Source
     def updateSource(self):
         self.source = "plants/{}_{}.png".format(self.plant.data['name'], int(self.plant.data['stage']))
 
