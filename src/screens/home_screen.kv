@@ -100,7 +100,7 @@
         size_hint: None, None
         size: self.texture_size
         id: monstera
-        source: "plants/{}_{}.png".format(app.local_data.plants[0]['name'], app.local_data.plants[0]['stage'])
+        source: "plants/{}_{}.png".format(app.local_data.plants[0].data['name'], int(app.local_data.plants[0].data['stage']))
         center_x: 200
         y: 20 + floor_height + tool_bar_height
         

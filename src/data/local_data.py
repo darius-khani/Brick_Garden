@@ -7,13 +7,14 @@ from paths import LOCAL_DATA, TEMP_DATA
 from data import fetch_all_events, calculated_bricked_seconds
 
 from kivy.event import EventDispatcher
-from kivy.properties import NumericProperty, ListProperty
+from kivy.properties import NumericProperty, ListProperty, DictProperty
+
 
 class LocalData(EventDispatcher):
     # Local Data
     last_pull: int                  # Last Time App was Open
     vitality = NumericProperty(0)   # Vitality i.e. Currency
-    plants = ListProperty([])       # List of Dictionaries of User's plants
+    plants = ListProperty([])      # List of Dictionaries of User's plants
 
     # Brick Synced Data
     bricked_time: int               # Time phone was bricked since last opened
@@ -50,7 +51,8 @@ class LocalData(EventDispatcher):
             data = json.load(file)
             self.last_pull = data["last_pull"]
             self.vitality = data["vitality"]
-            self.plants = data["plants"]
+            #self.plants = data["plants"]
+            self.plants = [Plant(data=plant) for plant in data["plants"]]
 
     # Update Data on local_data.json
     def updateData(self):
@@ -60,6 +62,9 @@ class LocalData(EventDispatcher):
 
         # Update Values
         for key in data:
+            if key == "plants":
+                data["plants"] = [dict(plant.data) for plant in self.plants]
+                continue
             data[key] = getattr(self, key)
 
         # Update File
@@ -83,9 +88,16 @@ class LocalData(EventDispatcher):
         with open(TEMP_DATA, "r", encoding="utf-8") as file:
             data = json.load(file)
         for key in data:
+            if key == "plants":
+                self.plants = [Plant(data=plant) for plant in data["plants"]]
+                continue
             setattr(self, key, data[key])
         with open(LOCAL_DATA, "w", encoding="utf-8") as file:
-            json.dump(data, file, indent=2)   
+            json.dump(data, file, indent=2)
+
+class Plant(EventDispatcher):
+    data = DictProperty({})
+
 
 
 # Universal Data Import
@@ -93,4 +105,4 @@ local_data = LocalData()
 
 if __name__ == "__main__":
     local_data.printData()
-    #data.stdReset()
+    #local_data.stdReset()

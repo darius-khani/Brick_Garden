@@ -1,4 +1,5 @@
 import os
+import time
 
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
@@ -8,7 +9,7 @@ from kivy.clock import Clock
 
 from random import randint
 
-from data import local_data
+from data import local_data, Plant
 
 # Keyboard Commands for Testing
 from kivy.core.window import Window
@@ -19,34 +20,53 @@ Builder.load_file(os.path.join(os.path.dirname(__file__), 'home_screen.kv'))    
 # HomeScreen Widget
 class HomeScreen(Screen):
     def on_enter(self, *args):
-        self._update_event = Clock.schedule_interval(self.update, 1.0/60.0)
-
-        #self._growthUpdate_event = Clock.schedule_interval(self.sync_check, 1)
-        #self._saveFile_event = Clock.schedule_interval(self.sync_check, 5)
+        local_data.stdReset()
+        self._update_event = Clock.schedule_interval(self.update, 1.0/20.0)
+        self._growthUpdate_event = Clock.schedule_interval(self.growthUpdate, 1)
+        self._saveFile_event = Clock.schedule_interval(self.saveFile, 5)
 
         ### TESTING ###
         Window.bind(on_key_down=self.on_key_down)
 
     def on_leave(self, *args):
         self._update_event.cancel()
-
-        #self._growthUpdate_event.cancel()
-        #self._saveFile_event.cancel()
+        self._growthUpdate_event.cancel()
+        self._saveFile_event.cancel()
 
         ### TESTING ###
         Window.unbind(on_key_down=self.on_key_down)
 
-
     def update(self, dt):
-        #local_data.last_pull = now_ms
 
+        pass
+
+    def growthUpdate(self, dt):
+        # for plant in plants
+        if local_data.plants[0].data["stage"] < 5:
+            old_stage = int(local_data.plants[0].data["stage"])
+            local_data.plants[0].data["stage"] += local_data.plants[0].data["growth_rate"] * dt
+            if local_data.plants[0].data["stage"] - old_stage > 1:
+                # Force Event | Stage Has Increased
+                local_data.plants[0] = local_data.plants[0]
+                pass
+            if local_data.plants[0].data["stage"] > 5:
+                local_data.plants[0].data["stage"] = 5
+        # Force Event
+        #local_data.plants[0] = local_data.plants[0]
+
+        # Update last_pull
+        local_data.last_pull = time.time() * 1000  # Technically off
+        local_data.vitality+=1
+        pass
+
+    def saveFile(self, dt):
+        local_data.updateData()
         pass
 
     ### TESTING ###
     def on_key_down(self, window, key, scancode, codepoint, modifier):
         if key == 32:   # spacebar
             local_data.vitality += 10
-
     pass
 
 
