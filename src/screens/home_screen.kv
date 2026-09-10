@@ -129,4 +129,4 @@
     size_hint: None, None
     size: self.texture_size 
     y: 20 + floor_height + tool_bar_height
-    x: (100 + self.plant.data.get('placement', 0) * 150 if self.plant else 0) - self.width / 2
+    x: (100 + self.plant.data.get('x', 0) * 150 if self.plant else 0) - self.width / 2

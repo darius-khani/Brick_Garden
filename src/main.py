@@ -8,6 +8,7 @@ Config.set('graphics', 'resizable', False)
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from kivy.core.text import LabelBase
+from kivy.core.audio import SoundLoader
 from kivy.properties import ObjectProperty
 
 # Screens
@@ -17,6 +18,7 @@ from screens import HomeScreen
 import os
 from paths import *
 
+#####################################
 ### MUST BE DONE BEFORE APP LOADS ###
 
 # Load Universal Data Object
@@ -36,10 +38,20 @@ LabelBase.register(name='PixelifySans', fn_regular=os.path.join(ASSETS_DIR, 'fon
 # Builds App | Creates ScreenManager | Loads brickgarden.kv
 class BrickGardenApp(App):
     local_data = ObjectProperty(None)
+    bg_music = None
+
     def build(self):
         # Make local_data a property of App
         self.local_data = local_data
 
+        # Loop Background Music
+        self.bg_music = SoundLoader.load(os.path.join(ASSETS_DIR, 'audio/piano_ambience.ogg'))
+        if self.bg_music:
+            self.bg_music.loop = True
+            self.bg_music.volume = 0.4   # ambient music should sit under any UI sounds
+            self.bg_music.play()
+
+        # Initialize Screen Manager
         sm = BrickGarden()
 
         #List of Screens
@@ -47,6 +59,17 @@ class BrickGardenApp(App):
         #sm.add_widget(Breathing(name='breathing'))
         
         return sm
+
+    # Pause Music when App is Paused
+    def on_pause(self):
+        if self.bg_music:
+            self.bg_music.stop()
+        return True
+
+    # Resume Music when App is Resumed
+    def on_resume(self):
+        if self.bg_music:
+            self.bg_music.play()
 
 
 # Root Widget | Extends ScreenManager

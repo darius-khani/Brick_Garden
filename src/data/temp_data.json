@@ -5,13 +5,15 @@
     {
       "name": "monstera",
       "stage": 1,
-      "placement": 0.6,
+      "x": 0.6,
+      "y": 0,
       "growth_rate": 0.1
     },
     {
       "name": "bird_of_paradise",
       "stage": 2.5,
-      "placement": 3.3,
+      "x": 3.3,
+      "y": 0,
       "growth_rate": 0.1
     }
   ]

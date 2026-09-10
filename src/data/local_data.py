@@ -38,7 +38,7 @@ class LocalData(EventDispatcher):
 
         ### TESTING ###
         self.stdReset()
-        self.last_pull = int(time.time() * 1000) - 5000
+        self.last_pull = int(time.time() * 1000) - 0000
 
         # Calculate bricked_time and add to plant stages
         self.bricked_time = calculated_bricked_seconds(events, self.last_pull)
