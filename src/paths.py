@@ -5,4 +5,5 @@ ASSETS_DIR = os.path.join(SRC_DIR, "assets")
 DATA_DIR   = os.path.join(SRC_DIR, "data")
 
 LOCAL_DATA = os.path.join(DATA_DIR, "local_data.json")
+BACKUP_DATA  = os.path.join(DATA_DIR, "backup_data.json")
 TEMP_DATA  = os.path.join(DATA_DIR, "temp_data.json")

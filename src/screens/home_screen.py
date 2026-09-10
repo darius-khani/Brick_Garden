@@ -33,9 +33,6 @@ class HomeScreen(Screen):
             self.ids.plant_layer.add_widget(widget)
 
     def on_enter(self, *args):
-        ### TESTING ###
-        local_data.stdReset()
-
         # Load Plants
         self.load_plants()
 
@@ -46,6 +43,7 @@ class HomeScreen(Screen):
         self._update_event = Clock.schedule_interval(self.update, 1.0/20.0)
         self._growthUpdate_event = Clock.schedule_interval(self.growthUpdate, 1)
         self._saveFile_event = Clock.schedule_interval(self.saveFile, 5)
+        self._backUpFile_event = Clock.schedule_interval(self.backUpFile, 60)
 
         ### TESTING ###
         Window.bind(on_key_down=self.on_key_down)
@@ -96,6 +94,11 @@ class HomeScreen(Screen):
     # 5 Second Updates
     def saveFile(self, dt):
         local_data.updateData()
+        pass
+
+    # 60 Second Updates
+    def backUpFile(self, dt):
+        local_data.backUpData()
         pass
 
     ### TESTING ###

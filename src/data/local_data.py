@@ -3,7 +3,7 @@ import json
 import time
 from datetime import datetime
 
-from paths import LOCAL_DATA, TEMP_DATA
+from paths import LOCAL_DATA, BACKUP_DATA, TEMP_DATA
 
 from data import fetch_all_events, calculated_bricked_seconds
 
@@ -35,7 +35,10 @@ class LocalData(EventDispatcher):
         super().__init__()
 
         # Pull From local_data.json
-        self.getData()
+        try:
+            self.getData()
+        except:
+            self.getBackUpData()
 
         # Load Current Time
         self.curr_time = datetime.now().strftime("%I:%M")
@@ -47,10 +50,8 @@ class LocalData(EventDispatcher):
         self.stdReset()
         self.last_pull = int(time.time() * 1000) - 0000
 
-        # Calculate bricked_time and add to plant stages
+        # Calculate bricked_time lapsed | Add to each plant
         self.bricked_time = calculated_bricked_seconds(events, self.last_pull)
-
-        # Calculate bricked_time | Add to each plant
         for plant in self.plants:
             #print(f"{plant.data['name'].title()}: {plant.data["stage"] + self.bricked_time * plant.data["growth_rate"]}")
             plant.data["stage"] += self.bricked_time * plant.data["growth_rate"]
@@ -86,6 +87,36 @@ class LocalData(EventDispatcher):
 
         # Update File
         with open(LOCAL_DATA, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=2)
+
+    # Read Data From backup_data.json
+    def getBackUpData(self):
+        # Pull Backup Data
+        with open(BACKUP_DATA, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            self.last_pull = data["last_pull"]
+            self.vitality = data["vitality"]
+            self.plants = [Plant(data=plant) for plant in data["plants"]]
+        
+        # Update File
+        with open(LOCAL_DATA, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=2)
+
+    # Backup Data on backup_data.json
+    def backUpData(self):
+        # Pull Old Data
+        with open(BACKUP_DATA, "r", encoding="utf-8") as file:
+            data = json.load(file)
+    
+        # Update Values
+        for key in data:
+            if key == "plants":
+                data["plants"] = [dict(plant.data) for plant in self.plants]
+                continue
+            data[key] = getattr(self, key)
+    
+        # Update File
+        with open(BACKUP_DATA, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=2)
 
 
