@@ -4,10 +4,12 @@ import time
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 
-from kivy.vector import Vector
 from kivy.clock import Clock
+from kivy.uix.image import Image
+from kivy.properties import ObjectProperty
 
 from random import randint
+from kivy.vector import Vector
 
 from data import local_data, Plant
 
@@ -17,10 +19,26 @@ from kivy.core.window import Window
 # Loads home_screen.kv | Register HomeScreen Rule
 Builder.load_file(os.path.join(os.path.dirname(__file__), 'home_screen.kv'))    # Strips 'homescreen.py' from path string and replaces it with 'home_screen.kv'
 
+# USE LAYOUT FOR BUTTONS
+
 # HomeScreen Widget
 class HomeScreen(Screen):
+    def load_plants(self):
+        # Clear old plants
+        self.ids.plant_layer.clear_widgets()
+        for plant in local_data.plants:
+            widget = PlantWidget(plant=plant)
+            widget.updateSource()
+            self.ids.plant_layer.add_widget(widget)
+
     def on_enter(self, *args):
+        ### TESTING ###
         local_data.stdReset()
+
+        # Load Plants
+        self.load_plants()
+
+        # Clocks
         self._update_event = Clock.schedule_interval(self.update, 1.0/20.0)
         self._growthUpdate_event = Clock.schedule_interval(self.growthUpdate, 1)
         self._saveFile_event = Clock.schedule_interval(self.saveFile, 5)
@@ -41,21 +59,33 @@ class HomeScreen(Screen):
         pass
 
     def growthUpdate(self, dt):
-        # for plant in plants
-        if local_data.plants[0].data["stage"] < 5:
-            old_stage = int(local_data.plants[0].data["stage"])
-            local_data.plants[0].data["stage"] += local_data.plants[0].data["growth_rate"] * dt
-            if local_data.plants[0].data["stage"] - old_stage > 1:
-                # Force Event | Stage Has Increased
-                local_data.plants[0] = local_data.plants[0]
-                pass
-            if local_data.plants[0].data["stage"] > 5:
-                local_data.plants[0].data["stage"] = 5
+        for widget in self.ids.plant_layer.children:
+            plant = widget.plant
+            if plant.data["stage"] < 5:
+                old_stage = int(plant.data["stage"])
+                plant.data["stage"] += plant.data["growth_rate"] * dt
+                # Force Event | Stage Has Incrased
+                if plant.data["stage"] - old_stage > 1:
+                    widget.updateSource()
+                # Stage Max of 5
+                if plant.data["stage"] > 5:
+                    plant.data["stage"] = 5
+
+        #if local_data.plants[0].data["stage"] < 5:
+        #    old_stage = int(local_data.plants[0].data["stage"])
+        #    local_data.plants[0].data["stage"] += local_data.plants[0].data["growth_rate"] * dt
+        #    if local_data.plants[0].data["stage"] - old_stage > 1:
+        #        # Force Event | Stage Has Increased
+        #        local_data.plants[0] = local_data.plants[0]
+        #        pass
+        #    if local_data.plants[0].data["stage"] > 5:
+        #        local_data.plants[0].data["stage"] = 5
+        
         # Force Event
         #local_data.plants[0] = local_data.plants[0]
 
         # Update last_pull
-        local_data.last_pull = time.time() * 1000  # Technically off
+        local_data.last_pull = time.time() * 1000  # Technically off by dt
         local_data.vitality+=1
         pass
 
@@ -68,6 +98,18 @@ class HomeScreen(Screen):
         if key == 32:   # spacebar
             local_data.vitality += 10
     pass
+
+
+class PlantWidget(Image):
+    plant = ObjectProperty(None)
+
+    def updateSource(self):
+        self.source = "plants/{}_{}.png".format(self.plant.data['name'], int(self.plant.data['stage']))
+
+
+
+
+
 
 
 """

@@ -95,15 +95,13 @@
         height: self.width / self.image_ratio
         pos: 20, floor_height + tool_bar_height - 120
 
-    # Plants
-    Image:
+    # Plants Layer
+    FloatLayout:
+        id: plant_layer
         size_hint: None, None
-        size: self.texture_size
-        id: monstera
-        source: "plants/{}_{}.png".format(app.local_data.plants[0].data['name'], int(app.local_data.plants[0].data['stage']))
-        center_x: 200
-        y: 20 + floor_height + tool_bar_height
-        
+        size: root.size
+        pos: 0, 0
+
     # Currency
     Label:
         size_hint: None, None
@@ -125,3 +123,10 @@
         text: f"4:30"
         color: 0.2, 0.6, 0.2, 1
         font_name: 'PixelifySans'
+
+# Plant Widget Template
+<PlantWidget>:
+    size_hint: None, None
+    size: self.texture_size
+    y: 20 + floor_height + tool_bar_height
+    center_x: 100 + self.plant.data.get('placement', 0) * 150 if self.plant else 0

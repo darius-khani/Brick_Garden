@@ -5,13 +5,13 @@
     {
       "name": "monstera",
       "stage": 1,
-      "placement": 0,
+      "placement": 0.4,
       "growth_rate": 0.1
     },
     {
       "name": "bird_of_paradise",
       "stage": 2.5,
-      "placement": 0,
+      "placement": 3,
       "growth_rate": 0.1
     }
   ]

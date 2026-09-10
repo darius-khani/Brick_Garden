@@ -14,7 +14,7 @@ class LocalData(EventDispatcher):
     # Local Data
     last_pull: int                  # Last Time App was Open
     vitality = NumericProperty(0)   # Vitality i.e. Currency
-    plants = ListProperty([])      # List of Dictionaries of User's plants
+    plants = []      # List of Dictionaries of User's plants
 
     # Brick Synced Data
     bricked_time: int               # Time phone was bricked since last opened
