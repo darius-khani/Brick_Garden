@@ -36,13 +36,24 @@ class LocalData(EventDispatcher):
         # Pull From FireBase
         events = fetch_all_events()
 
+        ### TESTING ###
+        self.stdReset()
+        self.last_pull = int(time.time() * 1000) - 5000
+
+        # Calculate bricked_time and add to plant stages
         self.bricked_time = calculated_bricked_seconds(events, self.last_pull)
+
+        # Calculate bricked_time | Add to each plant
+        for plant in self.plants:
+            #print(f"{plant.data['name'].title()}: {plant.data["stage"] + self.bricked_time * plant.data["growth_rate"]}")
+            plant.data["stage"] += self.bricked_time * plant.data["growth_rate"]
 
         if events[-1]["state"] == "bricked": self.bricked = True
         else: self.bricked = False
 
         # Update last_pull to current time in ms and write to local_data.json
         self.last_pull = int(time.time() * 1000)
+
         self.updateData()
 
     # Read Data From local_data.json
@@ -51,7 +62,6 @@ class LocalData(EventDispatcher):
             data = json.load(file)
             self.last_pull = data["last_pull"]
             self.vitality = data["vitality"]
-            #self.plants = data["plants"]
             self.plants = [Plant(data=plant) for plant in data["plants"]]
 
     # Update Data on local_data.json

@@ -64,28 +64,15 @@ class HomeScreen(Screen):
             if plant.data["stage"] < 5:
                 old_stage = int(plant.data["stage"])
                 plant.data["stage"] += plant.data["growth_rate"] * dt
-                # Force Event | Stage Has Incrased
+                # Update Image | Stage Has Incrased
                 if plant.data["stage"] - old_stage > 1:
                     widget.updateSource()
                 # Stage Max of 5
                 if plant.data["stage"] > 5:
                     plant.data["stage"] = 5
 
-        #if local_data.plants[0].data["stage"] < 5:
-        #    old_stage = int(local_data.plants[0].data["stage"])
-        #    local_data.plants[0].data["stage"] += local_data.plants[0].data["growth_rate"] * dt
-        #    if local_data.plants[0].data["stage"] - old_stage > 1:
-        #        # Force Event | Stage Has Increased
-        #        local_data.plants[0] = local_data.plants[0]
-        #        pass
-        #    if local_data.plants[0].data["stage"] > 5:
-        #        local_data.plants[0].data["stage"] = 5
-        
-        # Force Event
-        #local_data.plants[0] = local_data.plants[0]
-
         # Update last_pull
-        local_data.last_pull = time.time() * 1000  # Technically off by dt
+        local_data.last_pull = int(time.time() * 1000) # Technically off by dt
         local_data.vitality+=1
         pass
 
