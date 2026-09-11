@@ -63,17 +63,39 @@
         pos: 0, floor_height
         width: root.width
         height: self.width / self.image_ratio
-
-    # Sun
-    Image:
+    
+    # Sun or Moon
+    CelestialWidget:
         size_hint: None, None
         size: self.texture_size
-        id: sun
+        id: SunMoon
         source: f"greenhouse/sun.png"
         pos: root.width*2/3, -180 + greenhouse_height + tool_bar_height + floor_height
         width: root.width - 470
         height: self.width / self.image_ratio
         opacity: 0.6
+
+    # Weather
+    WeatherWidget:
+        size_hint: None, None
+        size: self.texture_size
+        id: Weather
+        source: f"greenhouse/cloudy_sky.png"
+        pos: 0, -280 + greenhouse_height + tool_bar_height + floor_height
+        width: root.width
+        height: self.width / self.image_ratio
+        opacity: 0.5
+
+    # GreenHouse Frame
+    Image:
+        size_hint: None, None
+        size: self.texture_size
+        id: greenhouseframe
+        source: f"greenhouse/greenhouseframe.png"
+        pos: 0, floor_height
+        width: root.width
+        height: self.width / self.image_ratio
+        opacity: 1
 
     # Top GreenHouse Bar
     Image:
@@ -101,6 +123,17 @@
         size_hint: None, None
         size: root.size
         pos: 0, 0
+
+    # Dark Overlay
+    Widget:
+        id: DarkOverlay
+        a: 0.5
+        canvas:
+            Color:
+                rgba: 0, 0, 0, DarkOverlay.a
+            Rectangle:
+                pos: 0, tool_bar_height
+                size: root.size 
 
     # Currency
     Label:

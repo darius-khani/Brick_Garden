@@ -24,10 +24,9 @@ class LocalData(EventDispatcher):
     # Local Time
     curr_time = StringProperty("")  # Current Time
 
-    # Testing
-    #manual_override = True
-    #manual_bricked = True
-    #manual_bricked_time = 1788907085451
+    ### TESTING ###
+    manual_override = True
+    manual_bricked = True
 
     # On Launch: Pull Local Data and Pull from FireBase | Calculate Bricked Time
     def __init__(self):
@@ -61,6 +60,13 @@ class LocalData(EventDispatcher):
 
         # Update last_pull to current time in ms and write to local_data.json
         self.last_pull = int(time.time() * 1000)
+
+        ### TESTING ###
+        if self.manual_override:
+            if self.manual_bricked:
+                self.bricked = True
+            else:
+                self.bricked = False
 
         self.updateData()
 
@@ -143,6 +149,7 @@ class LocalData(EventDispatcher):
         with open(LOCAL_DATA, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=2)
 
+# Plant Class To Hold Event Dispatching Data
 class Plant(EventDispatcher):
     data = DictProperty({})
 

@@ -1,17 +1,17 @@
 {
-  "last_pull": 1789083313995,
+  "last_pull": 1789089604086,
   "vitality": 100,
   "plants": [
     {
       "name": "monstera",
-      "stage": 3.4254684628002,
+      "stage": 1.9044882196001707,
       "x": 0.6,
       "tier": 0,
       "growth_rate": 0.1
     },
     {
       "name": "bird_of_paradise",
-      "stage": 4.9254684628001995,
+      "stage": 3.4044882196001707,
       "x": 3.3,
       "tier": 0,
       "growth_rate": 0.1
