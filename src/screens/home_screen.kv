@@ -54,12 +54,33 @@
             points: 0, tool_bar_height, self.width, tool_bar_height
             width: 12
         
-    # GreenHouse
+     # GreenHouse Background
+    Image:
+        size_hint: None, None
+        size: self.texture_size
+        id: GreenHouseBackground
+        source: f"greenhouse/greenhousebackground_sunny.png"
+        pos: 0, floor_height
+        width: root.width
+        height: self.width / self.image_ratio
+
+    # GreenHouse Window Frost
+    Widget:
+        id: FrostOverlay
+        a: 0.3
+        canvas:
+            Color:
+                rgba: 1, 1, 1, FrostOverlay.a
+            Rectangle:
+                pos: 0, tool_bar_height + floor_height
+                size: root.width, greenhouse_height*4/5
+
+    # GreenHouse Floor
     Image:
         size_hint: None, None
         size: self.texture_size
         id: greenhouse
-        source: f"greenhouse/greenhouse.png"
+        source: f"greenhouse/greenhousefloor.png"
         pos: 0, floor_height
         width: root.width
         height: self.width / self.image_ratio

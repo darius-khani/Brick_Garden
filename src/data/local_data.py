@@ -26,7 +26,7 @@ class LocalData(EventDispatcher):
 
     ### TESTING ###
     manual_override = True
-    manual_bricked = True
+    manual_bricked = False
 
     # On Launch: Pull Local Data and Pull from FireBase | Calculate Bricked Time
     def __init__(self):

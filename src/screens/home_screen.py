@@ -39,8 +39,10 @@ class HomeScreen(Screen):
         self.ids.Weather.setWeather()
         if local_data.bricked:
             self.ids.DarkOverlay.a = 0
+            self.ids.GreenHouseBackground.source = "greenhouse/greenhousebackground_sunny.png"
         else:
             self.ids.DarkOverlay.a = 0.5
+            self.ids.GreenHouseBackground.source = "greenhouse/greenhousebackground_cloudy.png"
 
     def on_enter(self, *args):
         # Set Sky
@@ -143,6 +145,6 @@ class WeatherWidget(Image):
         if local_data.bricked:
             self.opacity = 0
         else:
-            self.opacity = 0.5
+            self.opacity = 0.1
         pass
 
